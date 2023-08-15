@@ -15,17 +15,17 @@ void gotoxy(int x, int y) {
 	SetConsoleCursorPosition(Console, cursorpos);
 }
 
-void screen_setup(); //°ÔÀÓ ½ÃÀÛ Á÷ÈÄ È­¸é ±¸¼º
-int com_gawi_bawi_bo(); //ÄÄÇ»ÅÍ°¡ °¡À§-¹ÙÀ§-º¸ Áß¿¡¼­ ·£´ıÇÏ°Ô °í¸£´Â ÇÔ¼ö.
-void play_game(string un, int rh, string cn); //°ÔÀÓ ÇÃ·¹ÀÌ ·ÎÁ÷
-void start_setting(); //°ÔÀÓÀ» ½ÃÀÛÇÏ±â·Î ÇßÀ» ¶§ ÃÊ±â ¼³Á¤À» ´ã´çÇÏ´Â ÇÔ¼ö.
-void result_print(int result); //°á°ú¸¦ Ãâ·ÂÇÏ´Â ÇÔ¼ö
+void screen_setup(); //ê²Œì„ ì‹œì‘ ì§í›„ í™”ë©´ êµ¬ì„±
+int com_gawi_bawi_bo(); //ì»´í“¨í„°ê°€ ê°€ìœ„-ë°”ìœ„-ë³´ ì¤‘ì—ì„œ ëœë¤í•˜ê²Œ ê³ ë¥´ëŠ” í•¨ìˆ˜.
+void play_game(string un, int rh, string cn); //ê²Œì„ í”Œë ˆì´ ë¡œì§
+void start_setting(); //ê²Œì„ì„ ì‹œì‘í•˜ê¸°ë¡œ í–ˆì„ ë•Œ ì´ˆê¸° ì„¤ì •ì„ ë‹´ë‹¹í•˜ëŠ” í•¨ìˆ˜.
+void result_print(int result); //ê²°ê³¼ë¥¼ ì¶œë ¥í•˜ëŠ” í•¨ìˆ˜
 
 
 int main() {
 	screen_setup();
 	gotoxy(10, 20);
-	cout << "°ÔÀÓÀ» ½ÃÀÛÇÏ½Ã·Á¸é y, Á¾·áÇÏ½Ã·Á¸é nÀ» ÀÔ·ÂÇØÁÖ¼¼¿ä. >>> ";
+	cout << "ê²Œì„ì„ ì‹œì‘í•˜ì‹œë ¤ë©´ y, ì¢…ë£Œí•˜ì‹œë ¤ë©´ nì„ ì…ë ¥í•´ì£¼ì„¸ìš”. >>> ";
 	int igonan = _getch();
 	screen_setup();
 	if (igonan == 'y' || igonan == 'Y') {
@@ -34,7 +34,7 @@ int main() {
 	else if (igonan == 'n' || igonan == 'N') {
 		screen_setup();
 		gotoxy(10, 20);
-		cout << "°ÔÀÓÀ» Á¾·áÇÕ´Ï´Ù.";
+		cout << "ê²Œì„ì„ ì¢…ë£Œí•©ë‹ˆë‹¤.";
 		system("pause");
 	}
 }
@@ -70,23 +70,23 @@ void result_print(int result) {
 	screen_setup();
 	gotoxy(10, 20);
 	if (result > 0) {
-		cout << result << "Á¡ Â÷ÀÌ·Î ´ç½ÅÀÌ ½Â¸®Çß½À´Ï´Ù.";
+		cout << result << "ì  ì°¨ì´ë¡œ ë‹¹ì‹ ì´ ìŠ¹ë¦¬í–ˆìŠµë‹ˆë‹¤.";
 	}
 	else if (result == 0) {
-		cout << "ºñ°å½À´Ï´Ù.";
+		cout << "ë¹„ê²¼ìŠµë‹ˆë‹¤.";
 	}
 	else if (result < 0) {
-		cout << 0 - result << "Á¡ Â÷ÀÌ·Î ´ç½ÅÀÌ ÆĞ¹èÇß½À´Ï´Ù.";
+		cout << 0 - result << "ì  ì°¨ì´ë¡œ ë‹¹ì‹ ì´ íŒ¨ë°°í–ˆìŠµë‹ˆë‹¤.";
 	}
 	else {
-		cout << "Àß¸øµÈ °ªÀ» Àü´Ş¹Ş¾Ò½À´Ï´Ù : " << result << endl;
+		cout << "ì˜ëª»ëœ ê°’ì„ ì „ë‹¬ë°›ì•˜ìŠµë‹ˆë‹¤ : " << result << endl;
 	}
 }
 
 void game_screen(int namesize, string name, string comname, int comnamesize, long long int myscore) {
 	system("cls");
 
-	string score_sentence = "³» Á¡¼ö : " + to_string(myscore);
+	string score_sentence = "ë‚´ ì ìˆ˜ : " + to_string(myscore);
 	int sentencesize = score_sentence.length();
 	gotoxy(49 - (sentencesize/2),1);
 	cout << score_sentence;
@@ -108,8 +108,8 @@ void game_screen(int namesize, string name, string comname, int comnamesize, lon
 		gotoxy(99, a);
 		cout << screen_text;
 	}
-	//³» ÀÌ¸§ Ãâ·Â
-	string myname = "³» ÀÌ¸§:";
+	//ë‚´ ì´ë¦„ ì¶œë ¥
+	string myname = "ë‚´ ì´ë¦„:";
 	if (myname.length() >= namesize) namesize = myname.length();
 	gotoxy(namesize+1, 28);
 	cout << screen_text;
@@ -118,14 +118,14 @@ void game_screen(int namesize, string name, string comname, int comnamesize, lon
 		cout << screen_text;
 	}
 	gotoxy(1, 27);
-	cout << "³» ÀÌ¸§:";
+	cout << "ë‚´ ì´ë¦„:";
 	gotoxy(namesize + 1, 27);
 	cout << screen_text;
 	gotoxy(1, 28);
 	cout << name;
 
-	//ÄÄÇ»ÅÍ ÀÌ¸§ Ãâ·Â
-	string sangdae_name = "»ó´ë ÀÌ¸§:";
+	//ì»´í“¨í„° ì´ë¦„ ì¶œë ¥
+	string sangdae_name = "ìƒëŒ€ ì´ë¦„:";
 	if (sangdae_name.length() >= comnamesize) comnamesize = sangdae_name.length();
 	gotoxy(100 - comnamesize, 28);
 	cout << screen_text;
@@ -134,71 +134,71 @@ void game_screen(int namesize, string name, string comname, int comnamesize, lon
 		cout << screen_text;
 	}
 	gotoxy((99 - comnamesize) - 1, 27);
-	cout << screen_text << "»ó´ë ÀÌ¸§:";
+	cout << screen_text << "ìƒëŒ€ ì´ë¦„:";
 	gotoxy((99 - comnamesize) - 1, 28);
 	cout << screen_text << comname;
 }
 
 void play_game(string un, int rh, string cn) {
 	int a = 0;
-	string gbb_total[4] = { "0", "°¡À§", "¹ÙÀ§", "º¸" };
+	string gbb_total[4] = { "0", "ê°€ìœ„", "ë°”ìœ„", "ë³´" };
 	long long int user_score = 0, com_score = 0;
 	string user_choice = "";
 
 	while (a < rh) {
 		game_screen(un.length(), un, cn, cn.length(), user_score);
 		gotoxy(10, 10);
-		cout << "[(1)°¡À§, (2)¹ÙÀ§, (3)º¸] ¾î¶² °ÍÀ» ³»½ÇÁö ¹øÈ£ ¶Ç´Â ÀÌ¸§À¸·Î ÀÔ·ÂÇØ ÁÖ¼¼¿ä. >>> ";
+		cout << "[(1)ê°€ìœ„, (2)ë°”ìœ„, (3)ë³´] ì–´ë–¤ ê²ƒì„ ë‚´ì‹¤ì§€ ë²ˆí˜¸ ë˜ëŠ” ì´ë¦„ìœ¼ë¡œ ì…ë ¥í•´ ì£¼ì„¸ìš”. >>> ";
 		cin >> user_choice;
 		string com_choice = gbb_total[com_gawi_bawi_bo()];
 		gotoxy(10, 11);
-		if (user_choice == "1" || user_choice == "°¡À§") {
-			if (com_choice == "°¡À§") {
-				cout << "»ó´ë¿Í ¶È°°ÀÌ [" << com_choice << "]¸¦ ³»¼­ ºñ°å½À´Ï´Ù.½ÂÁ¡ 1Á¡À» È¹µæÇÏ¿´½À´Ï´Ù.";
+		if (user_choice == "1" || user_choice == "ê°€ìœ„") {
+			if (com_choice == "ê°€ìœ„") {
+				cout << "ìƒëŒ€ì™€ ë˜‘ê°™ì´ [" << com_choice << "]ë¥¼ ë‚´ì„œ ë¹„ê²¼ìŠµë‹ˆë‹¤.ìŠ¹ì  1ì ì„ íšë“í•˜ì˜€ìŠµë‹ˆë‹¤.";
 				user_score += 1;
 				com_score += 1;
 				Sleep(3000);
 			}
-			if (com_choice == "¹ÙÀ§") {
-				cout << "»ó´ë°¡ [" << com_choice << "]¸¦ ³»¼­ Á³½À´Ï´Ù. ½ÂÁ¡À» È¹µæÇÏÁö ¸øÇÏ¿´½À´Ï´Ù.";
+			if (com_choice == "ë°”ìœ„") {
+				cout << "ìƒëŒ€ê°€ [" << com_choice << "]ë¥¼ ë‚´ì„œ ì¡ŒìŠµë‹ˆë‹¤. ìŠ¹ì ì„ íšë“í•˜ì§€ ëª»í•˜ì˜€ìŠµë‹ˆë‹¤.";
 				com_score += 3;
 				Sleep(3000);
 			}
-			if (com_choice == "º¸") {
-				cout << "»ó´ë°¡ [" << com_choice << "]¸¦ ³»¼­ ÀÌ°å½À´Ï´Ù. ½ÂÁ¡ 3Á¡À» È¹µæÇÏ¿´½À´Ï´Ù.";
+			if (com_choice == "ë³´") {
+				cout << "ìƒëŒ€ê°€ [" << com_choice << "]ë¥¼ ë‚´ì„œ ì´ê²¼ìŠµë‹ˆë‹¤. ìŠ¹ì  3ì ì„ íšë“í•˜ì˜€ìŠµë‹ˆë‹¤.";
 				user_score += 3;
 				Sleep(3000);
 			}
-		} else if (user_choice == "2" || user_choice == "¹ÙÀ§") {
-			if (com_choice == "°¡À§") {
-				cout << "»ó´ë°¡ [" << com_choice << "]¸¦ ³»¼­ ÀÌ°å½À´Ï´Ù. ½ÂÁ¡ 3Á¡À» È¹µæÇÏ¿´½À´Ï´Ù.";
+		} else if (user_choice == "2" || user_choice == "ë°”ìœ„") {
+			if (com_choice == "ê°€ìœ„") {
+				cout << "ìƒëŒ€ê°€ [" << com_choice << "]ë¥¼ ë‚´ì„œ ì´ê²¼ìŠµë‹ˆë‹¤. ìŠ¹ì  3ì ì„ íšë“í•˜ì˜€ìŠµë‹ˆë‹¤.";
 				user_score += 3;
 				Sleep(3000);
 			}
-			if (com_choice == "¹ÙÀ§") {
-				cout << "»ó´ë¿Í ¶È°°ÀÌ [" << com_choice << "]¸¦ ³»¼­ ºñ°å½À´Ï´Ù. ½ÂÁ¡ 1Á¡À» È¹µæÇÏ¿´½À´Ï´Ù.";
+			if (com_choice == "ë°”ìœ„") {
+				cout << "ìƒëŒ€ì™€ ë˜‘ê°™ì´ [" << com_choice << "]ë¥¼ ë‚´ì„œ ë¹„ê²¼ìŠµë‹ˆë‹¤. ìŠ¹ì  1ì ì„ íšë“í•˜ì˜€ìŠµë‹ˆë‹¤.";
 				com_score += 1;
 				user_score += 1;
 				Sleep(3000);
 			}
-			if (com_choice == "º¸") {
-				cout << "»ó´ë°¡ [" << com_choice << "]¸¦ ³»¼­ Á³½À´Ï´Ù. ½ÂÁ¡À» È¹µæÇÏÁö ¸øÇÏ¿´½À´Ï´Ù.";
+			if (com_choice == "ë³´") {
+				cout << "ìƒëŒ€ê°€ [" << com_choice << "]ë¥¼ ë‚´ì„œ ì¡ŒìŠµë‹ˆë‹¤. ìŠ¹ì ì„ íšë“í•˜ì§€ ëª»í•˜ì˜€ìŠµë‹ˆë‹¤.";
 				com_score += 3;
 				Sleep(3000);
 			}
-		} else if (user_choice == "3" || user_choice == "º¸") {
-			if (com_choice == "°¡À§") {
-				cout << "»ó´ë°¡ [" << com_choice << "]¸¦ ³»¼­ Á³½À´Ï´Ù. ½ÂÁ¡À» È¹µæÇÏÁö ¸øÇÏ¿´½À´Ï´Ù.";
+		} else if (user_choice == "3" || user_choice == "ë³´") {
+			if (com_choice == "ê°€ìœ„") {
+				cout << "ìƒëŒ€ê°€ [" << com_choice << "]ë¥¼ ë‚´ì„œ ì¡ŒìŠµë‹ˆë‹¤. ìŠ¹ì ì„ íšë“í•˜ì§€ ëª»í•˜ì˜€ìŠµë‹ˆë‹¤.";
 				com_score += 3;
 				Sleep(3000);
 			}
-			if (com_choice == "¹ÙÀ§") {
-				cout << "»ó´ë°¡ [" << com_choice << "]¸¦ ³»¼­ ÀÌ°å½À´Ï´Ù. ½ÂÁ¡ 3Á¡À» È¹µæÇÏ¿´½À´Ï´Ù.";
+			if (com_choice == "ë°”ìœ„") {
+				cout << "ìƒëŒ€ê°€ [" << com_choice << "]ë¥¼ ë‚´ì„œ ì´ê²¼ìŠµë‹ˆë‹¤. ìŠ¹ì  3ì ì„ íšë“í•˜ì˜€ìŠµë‹ˆë‹¤.";
 				user_score += 3;
 				Sleep(3000);
 			}
-			if (com_choice == "º¸") {
-				cout << "»ó´ë¿Í ¶È°°ÀÌ [" << com_choice << "]¸¦ ³»¼­ ºñ°å½À´Ï´Ù. ½ÂÁ¡ 1Á¡À» È¹µæÇÏ¿´½À´Ï´Ù.";
+			if (com_choice == "ë³´") {
+				cout << "ìƒëŒ€ì™€ ë˜‘ê°™ì´ [" << com_choice << "]ë¥¼ ë‚´ì„œ ë¹„ê²¼ìŠµë‹ˆë‹¤. ìŠ¹ì  1ì ì„ íšë“í•˜ì˜€ìŠµë‹ˆë‹¤.";
 				com_score += 1;
 				user_score += 1;
 				Sleep(3000);
@@ -210,7 +210,7 @@ void play_game(string un, int rh, string cn) {
 			result_print(user_score - com_score);
 
 			gotoxy(10, 21);
-			cout << "°ÔÀÓÀ» ´Ù½Ã ÇÏ½Ã·Á¸é y, Á¾·áÇÏ½Ã·Á¸é nÀ» ÀÔ·ÂÇØÁÖ¼¼¿ä. >>> ";
+			cout << "ê²Œì„ì„ ë‹¤ì‹œ í•˜ì‹œë ¤ë©´ y, ì¢…ë£Œí•˜ì‹œë ¤ë©´ nì„ ì…ë ¥í•´ì£¼ì„¸ìš”. >>> ";
 			int regame = _getch();
 			if (regame == 'y' || regame == 'Y') {
 				start_setting();
@@ -228,21 +228,21 @@ void start_setting() {
 
 	gotoxy(10, 20);
 	string username = "";
-	cout << "´ç½ÅÀÇ ÀÌ¸§À» ÀÔ·ÂÇØÁÖ¼¼¿ä. >>> ";
+	cout << "ë‹¹ì‹ ì˜ ì´ë¦„ì„ ì…ë ¥í•´ì£¼ì„¸ìš”. >>> ";
 	cin >> username;
 	
 	gotoxy(10, 21);
 	string comname = "";
-	cout << "»ó´ëÀÇ ÀÌ¸§À» ÁöÁ¤ÇØÁÖ¼¼¿ä. >>> ";
+	cout << "ìƒëŒ€ì˜ ì´ë¦„ì„ ì§€ì •í•´ì£¼ì„¸ìš”. >>> ";
 	cin >> comname;
 
 	gotoxy(10, 22);
-	cout << "¸î ¶ó¿îµå¸¦ ÁøÇàÇÏ°í ½ÍÀ¸½Å°¡¿ä? >>> ";
+	cout << "ëª‡ ë¼ìš´ë“œë¥¼ ì§„í–‰í•˜ê³  ì‹¶ìœ¼ì‹ ê°€ìš”? >>> ";
 	int round_howmany = 0;
 	cin >> round_howmany;
 
 	gotoxy(10, 23);
-	cout << "Àá½Ã ÈÄ °ÔÀÓÀ» ½ÃÀÛÇÏ°Ú½À´Ï´Ù. ½Â¸®ÇÏ¸é 3Á¡, ¹«½ÂºÎ´Â 1Á¡, ÆĞ¹è´Â 0Á¡À» È¹µæÇÕ´Ï´Ù.";
+	cout << "ì ì‹œ í›„ ê²Œì„ì„ ì‹œì‘í•˜ê² ìŠµë‹ˆë‹¤. ìŠ¹ë¦¬í•˜ë©´ 3ì , ë¬´ìŠ¹ë¶€ëŠ” 1ì , íŒ¨ë°°ëŠ” 0ì ì„ íšë“í•©ë‹ˆë‹¤.";
 	Sleep(3000);
 	play_game(username, round_howmany, comname);
 }
