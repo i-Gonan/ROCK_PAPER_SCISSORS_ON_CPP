@@ -8,11 +8,11 @@
 using namespace std;
 
 void gotoxy(int x, int y) {
-	HANDLE Console = GetStdHandle(STD_OUTPUT_HANDLE);
-	COORD cursorpos;
-	cursorpos.X = x;
-	cursorpos.Y = y;
-	SetConsoleCursorPosition(Console, cursorpos);
+	HANDLE Console = GetStdHandle(STD_OUTPUT_HANDLE); //HANDLE은 윈도우에서 다양한 시스템 객체를 관리하기 위해 사용하는 고유한 식별자(콘솔 창도 객체에 해당) - STD_OUTPUT_HANDLE은 지금 콘솔창의 출력에 대한 핸들을 전달함.
+	COORD cursorpos; // COORD 구조체는 윈도우 API에서 사용하는 2차원 좌표값을 나타내는 구조체로, 커서나 창의 위치, 문자열의 위치와 같은 정보를 저장할 수 있음. SHORT형의 변수 X와 Y를 가짐.
+	cursorpos.X = x; // 이동하고자 하는 콘솔창 x좌표
+	cursorpos.Y = y; // 이동하고자 하는 콘솔창 Y좌표
+	SetConsoleCursorPosition(Console, cursorpos); //커서 위치 변경
 }
 
 void screen_setup(); //게임 시작 직후 화면 구성
@@ -60,7 +60,7 @@ void screen_setup() {
 	}
 }
 
-int com_gawi_bawi_bo() {
+int com_random_choice() { //컴퓨터가 가위, 바위, 보 중에서 랜덤하게 선택하도록 하는 함수
 	srand(static_cast<unsigned int>(time(NULL)));
 	int gbb_com = rand() % 3 + 1;
 	return gbb_com;
@@ -92,6 +92,7 @@ void game_screen(int namesize, string name, string comname, int comnamesize, lon
 	cout << score_sentence;
 
 	string screen_text = "#";
+	//게임창 테두리 구성
 	for (int a = 0; a < 100; a++) {
 		gotoxy(a, 0);
 		cout << screen_text;
@@ -150,58 +151,58 @@ void play_game(string un, int rh, string cn) {
 		gotoxy(10, 10);
 		cout << "[(1)가위, (2)바위, (3)보] 어떤 것을 내실지 번호 또는 이름으로 입력해 주세요. >>> ";
 		cin >> user_choice;
-		string com_choice = gbb_total[com_gawi_bawi_bo()];
+		string com_choice = gbb_total[com_random_choice()];
 		gotoxy(10, 11);
 		if (user_choice == "1" || user_choice == "가위") {
 			if (com_choice == "가위") {
 				cout << "상대와 똑같이 [" << com_choice << "]를 내서 비겼습니다.승점 1점을 획득하였습니다.";
 				user_score += 1;
 				com_score += 1;
-				Sleep(3000);
+				Sleep(2500);
 			}
 			if (com_choice == "바위") {
 				cout << "상대가 [" << com_choice << "]를 내서 졌습니다. 승점을 획득하지 못하였습니다.";
 				com_score += 3;
-				Sleep(3000);
+				Sleep(2500);
 			}
 			if (com_choice == "보") {
 				cout << "상대가 [" << com_choice << "]를 내서 이겼습니다. 승점 3점을 획득하였습니다.";
 				user_score += 3;
-				Sleep(3000);
+				Sleep(2500);
 			}
 		} else if (user_choice == "2" || user_choice == "바위") {
 			if (com_choice == "가위") {
 				cout << "상대가 [" << com_choice << "]를 내서 이겼습니다. 승점 3점을 획득하였습니다.";
 				user_score += 3;
-				Sleep(3000);
+				Sleep(2500);
 			}
 			if (com_choice == "바위") {
 				cout << "상대와 똑같이 [" << com_choice << "]를 내서 비겼습니다. 승점 1점을 획득하였습니다.";
 				com_score += 1;
 				user_score += 1;
-				Sleep(3000);
+				Sleep(2500);
 			}
 			if (com_choice == "보") {
 				cout << "상대가 [" << com_choice << "]를 내서 졌습니다. 승점을 획득하지 못하였습니다.";
 				com_score += 3;
-				Sleep(3000);
+				Sleep(2500);
 			}
 		} else if (user_choice == "3" || user_choice == "보") {
 			if (com_choice == "가위") {
 				cout << "상대가 [" << com_choice << "]를 내서 졌습니다. 승점을 획득하지 못하였습니다.";
 				com_score += 3;
-				Sleep(3000);
+				Sleep(2500);
 			}
 			if (com_choice == "바위") {
 				cout << "상대가 [" << com_choice << "]를 내서 이겼습니다. 승점 3점을 획득하였습니다.";
 				user_score += 3;
-				Sleep(3000);
+				Sleep(2500);
 			}
 			if (com_choice == "보") {
 				cout << "상대와 똑같이 [" << com_choice << "]를 내서 비겼습니다. 승점 1점을 획득하였습니다.";
 				com_score += 1;
 				user_score += 1;
-				Sleep(3000);
+				Sleep(2500);
 			}
 		}
 
